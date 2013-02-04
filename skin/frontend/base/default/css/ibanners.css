@@ -1,0 +1,28 @@
+/**
+ * @category    Fishpig
+ * @package     Fishpig_iBanners
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+
+.ibanners.animated { overflow: hidden; width: 100%; }
+.ibanners.animated ul { height: 1%; overflow: hidden; width: 9000px;  }
+.ibanners.animated ul li { float: left; overflow: hidden; }
+
+.ibanners.static { overflow: hidden; width: 100%; }
+.ibanners.static ul { height: 1%; overflow: hidden; width: 9000px; }
+.ibanners.static ul li { float: left; }
+
+.ibanners-wrapper { position: relative; }
+
+.ibanners-wrapper .controls { position: absolute; width: 100%; }
+.ibanners-wrapper .controls .control-prev { float: left; }
+.ibanners-wrapper .controls .control-next { float: right; }
+
+.ibanners-wrapper .controls-top { top: 0; }
+.ibanners-wrapper .controls-middle { top: 45%; }
+.ibanners-wrapper .controls-bottom { bottom: 0; }
+.ibanners-wrapper .controls-below { position: static; height: 1%; overflow: hidden; }
+
+.ibanners-wrapper .controls-ol .control-prev { position: relative; left: -10px; }
+.ibanners-wrapper .controls-ol .control-next { position: relative; right: -10px; }

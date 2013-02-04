@@ -1,0 +1,113 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_iBanners
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php if ($this->hasValidGroup()): ?>
+	<?php $group = $this->getGroup() ?>
+	<?php $banners = $this->getBanners() ?>
+	<?php if ($this->getGroup()->getBannerCount() == 1): ?>
+		<div id="<?php echo $this->getWrapperId() ?>" class="ibanners-single <?php echo $this->getWrapperClass() ?>">
+		<?php foreach($banners as $banner): ?>
+			<?php if ($banner->hasUrl()): ?>
+				<a href="<?php echo $banner->getUrl() ?>" title="<?php echo $this->escapeHtml($banner->getTitle()) ?>">
+			<?php endif; ?>
+			<img src="<?php echo $banner->getImageUrl() ?>" alt="<?php echo $this->escapeHtml($banner->getAltText()) ?>" />
+			<?php if ($banner->hasUrl()): ?>
+				</a>
+			<?php endif; ?>
+			<?php if ($banner->getHtml()): ?>
+				<div class="html"><?php echo $banner->getHtml() ?></div>
+			<?php endif; ?>
+		<?php endforeach; ?>
+		</div>
+	<?php elseif ($this->getGroup()->getBannerCount() > 1): ?>
+		<div id="<?php echo $this->getWrapperId() ?>-wrapper" class="<?php echo $this->getWrapperClass() ?>">
+			<div id="<?php echo $this->getWrapperId() ?>" class="ibanners <?php if ($group->isAnimationEnabled()): ?>animated<?php else: ?>static<?php endif; ?>">
+				<ul>
+					<?php foreach($banners as $banner): ?>
+						<li id="ibanner-<?php echo $banner->getId() ?>" class="banner">
+							<?php if ($banner->getImageUrl()): ?>
+								<?php if ($banner->hasUrl()): ?>
+									<a href="<?php echo $banner->getUrl() ?>" title="<?php echo $this->escapeHtml($banner->getTitle()) ?>"<?php if ($banner->getUrlTarget()): ?> target="<?php echo $banner->getUrlTarget() ?>"<?php endif; ?>>
+								<?php endif; ?>
+								<img src="<?php echo $banner->getImageUrl() ?>" alt="<?php echo $this->escapeHtml($banner->getAltText()) ?>" />
+								<?php if ($banner->hasUrl()): ?>
+									</a>
+								<?php endif; ?>
+							<?php endif; ?>
+							<?php if ($banner->getHtml()): ?>
+								<div class="html"><?php echo $banner->getHtml() ?></div>
+							<?php endif; ?>
+						</li>
+					<?php endforeach; ?>
+					<?php if ($group->isAnimationEnabled() && $this->getGroup()->getCarouselEffect() != 'fade'): ?>
+						<?php
+							/**
+							 * When using the scroll effect, the first slide must be duplicated at the end of the slide list
+							 * This ensures a smooth scrolling action when moving between the last and first slide
+							 */
+						?>
+						<?php $banner = $banners->getFirstItem() ?>
+						<li id="ibanner-<?php echo $banner->getId() ?>-2" class="banner">
+							<?php if ($banner->getImageUrl()): ?>
+								<?php if ($banner->hasUrl()): ?>
+									<a href="<?php echo $banner->getUrl() ?>" title="<?php echo $this->escapeHtml($banner->getTitle()) ?>"<?php if ($banner->getUrlTarget()): ?> target="<?php echo $banner->getUrlTarget() ?>"<?php endif; ?>>
+								<?php endif; ?>
+								<img src="<?php echo $banner->getImageUrl() ?>" alt="<?php echo $this->escapeHtml($banner->getAltText()) ?>" />
+								<?php if ($banner->hasUrl()): ?>
+									</a>
+								<?php endif; ?>
+							<?php endif; ?>
+							<?php if ($banner->getHtml()): ?>
+								<div class="html"><?php echo $banner->getHtml() ?></div>
+							<?php endif; ?>
+						</li>
+					<?php endif; ?>
+				</ul>
+			</div>
+			<?php if ($this->canAnimate()): ?>
+				<?php if ($this->getControlsPosition() !== ''): ?>
+					<div class="controls controls-<?php echo $this->getControlsPosition() ?><?php if ($group->getControlsOverlap()): ?> controls-ol<?php endif; ?>">
+						<div class="control-prev">
+							<a href="#" class="carousel-control" rel="prev"><img src="<?php echo $this->getSkinUrl('images/ibanners/arrow-left.png') ?>" alt="<?php echo $this->__('Previous') ?>" /></a>
+						</div>
+						<div class="control-next">
+							<a href="#" class="carousel-control" rel="next"><img src="<?php echo $this->getSkinUrl('images/ibanners/arrow-right.png') ?>" alt="<?php echo $this->__('Next') ?>" /></a>
+						</div>			
+					</div>
+				<?php endif; ?>
+			<?php endif; ?>
+		</div>
+		<?php if ($this->canAnimate()): ?>
+		<script type="text/javascript">
+		//<![CDATA[
+			<?php
+				/**
+				 * Reset the carousel to the first slide
+				 * Without these two lines, some browsers will start the carousel at the incorrect position
+				 * after a refresh
+				 */
+			?>
+			$('<?php echo $this->getWrapperId() ?>').scrollLeft = 0;
+			$('<?php echo $this->getWrapperId() ?>').scrollTop = 0;
+			
+			new Carousel('<?php echo $this->getWrapperId() ?>', $('<?php echo $this->getWrapperId() ?>').select('li.banner'), $('<?php echo $this->getWrapperId() ?>-wrapper').select('.carousel-control'), {
+				duration: <?php echo $group->getCarouselDuration() ?>,
+				auto: <?php if ($group->getCarouselAuto()): ?>true<?php else: ?>false<?php endif; ?>,
+				frequency: <?php echo $group->getCarouselFrequency() ?>,
+				visibleSlides: <?php echo $group->getCarouselVisibleSlides() ?>,
+				circular: true,
+				wheel: false,
+				effect: '<?php echo $this->getGroup()->getCarouselEffect() ?>',
+				transition: '<?php echo $this->getGroup()->getCarouselTransition() ?>',
+				selectedClassName: 'active'
+			});
+		//]]>
+		</script>
+		<?php endif; ?>
+	<?php endif; ?>
+<?php endif; ?>

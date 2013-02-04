@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<layout>
+
+	<!--
+		/**
+		 * Use this handle to include the CSS and JavaScript files needed to display the banner group
+		 * To include these on a page, add the following to your XML
+		 * 
+		 * <update handle="ibanners_default" />
+		 *
+		 */
+	-->
+	<ibanners_default>
+		<reference name="head">
+			<action method="addJs"><script>fishpig/carousel.min.js</script></action>
+			<action method="addCss"><stylesheet>css/ibanners.css</stylesheet></action>
+		</reference>
+	</ibanners_default>
+
+	<!--
+	 /**
+	  * The cms_index_index block below injects the banner group with the code 'home'
+	  * into the homepage
+	  *
+	  * To include other banner groups, copy the block code
+	  * To include the JS/CSS on a page, ensure you include the <update handle line
+	  *
+	  */
+	-->
+	<cms_index_index>
+		<update handle="ibanners_default" />
+		<reference name="content">
+			<block type="ibanners/view" name="ibanners.homepage" before="-">
+				<action method="setGroupCode"><group_code>home</group_code></action>
+				<action method="setDisplayControls"><controls>1</controls></action>
+			</block>
+		</reference>
+	</cms_index_index>
+	
+</layout>

@@ -1,0 +1,104 @@
+<?php
+/**
+ *
+ */
+
+	$banner = Mage::registry('ibanners_banner');
+	
+	if (!$banner) {
+		$group = Mage::registry('ibanners_group');
+	}
+	else {
+		$group = $banner->getGroup();
+	}
+
+?>
+<?php if ($group): ?>
+<div id="ibgc" style="display: none;">
+	<div id="ibgc-shadow" style="display: none;"></div>
+	<div id="ibgc-frame" style="display: none;">
+		<div class="inner">
+			<div class="content-header">
+				<h3><?php echo $this->__('iBanners: %s - XML', $group->getTitle()) ?></h3>
+			</div>
+			<p> The following XML code can be used to display the <em><?php echo $group->getTitle() ?></em> banner group on your website.</p>
+			<p>Copy the code into either a layout XML file or a Layout Update XML field in the Magento Admin. You may need to change the reference name parameter to position the group where you want it.</p>
+
+			<div class="fieldset">
+<textarea id="ibgc-code" rows="10" cols="50" onclick="this.focus();this.select()" readonly="readonly">
+&lt;reference name="content"&gt;
+  &lt;block type="ibanners/view" name="ibanners.<?php echo $group->getCode() ?>" as="<?php echo $group->getCode() ?>"&gt;
+    &lt;action method="setGroupCode"&gt;&lt;code&gt;<?php echo $group->getCode() ?>&lt;/code&gt;&lt;/action&gt;
+  &lt;/block&gt;
+&lt;/reference&gt;
+</textarea>
+			</div>
+			<div class="buttons-set">
+				<button type="button" class="button" id="ibgc-btn"><span><span><?php echo $this->__('Close') ?></span></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	(function() {
+		var a = new Element('a', { 'href': '#', 'id': 'ibgc-go', 'style': 'margin-left: 5px;font-size:11px;'}).update('(<?php echo $this->__('Get The XML Code') ?>)');
+		
+		$('content').select('h3.icon-head').first().appendChild(a);
+		
+		var ibgc = {
+			wrapper: $('ibgc'),
+			shadow: $('ibgc-shadow'),
+			frame: $('ibgc-frame'),
+			code: $('ibgc-code'),
+			btn: $('ibgc-btn'),
+			go: $('ibgc-go')
+		};
+		
+		var shadowOpc = 0.6;
+		
+		ibgc.go.observe('click', function(event) {
+			Event.stop(event);
+			
+			ibgc.wrapper.show();
+			
+			Effect.Appear(ibgc.shadow, {
+				duration: 0.4,
+				from: 0,
+				to: shadowOpc
+			});
+			
+			Effect.Appear(ibgc.frame, {
+				duration: 0.5,
+				from: 0,
+				to: 1,
+				afterFinish: function() {
+					ibgc.code.select();
+				}
+			});
+		});
+		
+		ibgc.btn.observe('click', function(event) {
+			Event.stop(event);
+			
+			Effect.Fade(ibgc.frame, {
+				duration: 0.2,
+				from: 1,
+				to: 0,
+				afterFinish: function() {
+					ibgc.frame.hide();
+				}
+			});
+			
+			Effect.Fade(ibgc.shadow, {
+				duration: 0.3,
+				from: shadowOpc,
+				to: 0,
+				afterFinish: function() {
+					ibgc.shadow.hide();
+					ibgc.wrapper.hide();
+				}
+			});
+		});
+	})();
+</script>
+<?php endif; ?>

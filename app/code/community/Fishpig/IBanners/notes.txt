@@ -1,0 +1,91 @@
+##
+# Fishpig's iBanners for Magento eCommerce
+#
+# Author:			Benn Tideswell
+# Documentation:	http://fishpig.co.uk/ibanners/ (coming soon)
+# Email Support:	help@fishpig.co.uk
+# Bug Reports:		help@fishpig.co.uk
+##
+
+TODO
+- Convert animation and control values to serialized single columns
+
+14/08/2012 - 1.0.7
+- Added dynamic controls that can be activated via the group
+- Removed group animation settings from config
+- Added option to get XML code from Admin
+
+14/08/2012 - 1.0.4
+- Added images to controls
+
+14/08/2012 - 1.0.2
+- Added option to add controls to slideshow
+
+14/08/2012 - 1.0.1
+- Added ability to add custom wrapper ID and class
+
+20/02/2012 - 1.0.0
+- Added fix that caused disabled groups to display
+- Added fix that didn't load an Admin group in a multistore
+- Auto-set the default template when not set in XML
+
+20/02/2012 - v0.9.10
+- Added url_target field to specify target for banner links
+
+07/02/2012 - v0.9.9
+- Added role fix
+
+03/02/2012 - v0.9.8
+- Added change to allow relative banner URL's
+- Added role for Admin permissions
+
+13/12/2011 - v0.9.7
+- Moved config into FishPig tab
+- Added fix for multi-store group selection with same code
+
+02/09/2011 - v0.9.6
+- Updated template to remove image tag when no image uploaded
+- Added fix for Mage_Core_Model_File_Uploader error
+
+v0.9.5
+- Added fix for auto start not being overridden
+
+23/08/2011 - v0.9.4
+- Added filter for disabled banners in view block
+
+30/07/2011 - v0.9.3
+- added scrollLeft fix to reset carousel on page refresh
+
+28/07/2011 - v0.9.2
+- added randomise_banners, which enables you to display banners in a random order
+- added duplicate first slide to end of carousel to create smooth scrolling effect
+
+28/07/2011 - v0.9.1
+- added carousel_animate field, which enables/disables animation
+
+27/07/2011 - v0.9.0
+- Moved extension to stable
+- Added configuration options for animation
+- Improved default template
+- Added support for single images
+- Added full support for HTML slides
+
+27/07/2011 - v0.5.4
+- Removed custom JS and included Protype Carousel (http://code.google.com/p/prototype-carousel/)
+
+26/07/2011 - v0.5.3
+- Added html field to banner
+
+17/06/2011 - v0.5.2
+- Added JS to extension
+
+10/06/2011 - v0.1.0
+- Base functionality added
+
+TODO
+- Add link_target field
+- Disable group with no images
+- HTML banners
+- Add language file
+- Add delay to config file
+

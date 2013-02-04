@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+		<cms>
+			<children>
+				<ibanners translate="title" module="ibanners">
+					<title>iBanners</title>
+					<sort_order>24</sort_order>
+					<children>
+						<group>
+							<title>Manage Groups</title>
+							<sort_order>6</sort_order>
+							<action>ibanners_admin/adminhtml_group</action>
+						</group>
+						<banner>
+							<title>Manage Banners</title>
+							<sort_order>11</sort_order>
+							<action>ibanners_admin/adminhtml_banner</action>
+						</banner>
+						<settings>
+							<title>Settings</title>
+							<sort_order>44</sort_order>
+							<action>adminhtml/system_config/edit/section/ibanners</action>
+						</settings>
+					</children>
+				</ibanners>
+			</children>
+		</cms>
+	</menu>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<cms>
+						<children>
+							<ibanners translate="title" module="ibanners">
+								<title>iBanners</title>
+								<sort_order>120</sort_order>
+								<children>
+									<group translate="title">
+										<title>Manage Groups</title>
+										<sort_order>6</sort_order>
+									</group>
+									<banner translate="title">
+										<title>Manage Banners</title>
+										<sort_order>11</sort_order>
+									</banner>
+									<settings translate="title">
+										<title>Settings</title>
+										<sort_order>99</sort_order>
+									</settings>
+								</children>
+							</ibanners>
+						</children>
+					</cms>
+					<system>
+						<children>
+							<config>
+								<children>
+									<ibanners translate="title" module="ibanners">
+										<title>iBanners</title>
+										<sort_order>990</sort_order>
+									</ibanners>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>
